@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react'
 import './App.css'
+import { fetchTodosFromGitHub, saveTodosToGitHub } from './githubApI'
+import debounce from 'lodash.debounce'
 
 type Todo = {
   id: number
@@ -23,17 +25,19 @@ function App() {
   const [editDate, setEditDate] = useState('')
   const [editCategory, setEditCategory] = useState('')
 
-  // 初回読み込み
+  // 初回読み込み（localStorage→GitHubへ変更）
   useEffect(() => {
-    const stored = localStorage.getItem('todos')
-    if (stored) {
-      setTodos(JSON.parse(stored))
-    }
+    fetchTodosFromGitHub().then(setTodos)
   }, [])
 
-  // 自動保存
+  // 自動保存（localStorage→GitHubへ変更）
+  const debouncedSave = debounce((todos: Todo[]) => {
+    saveTodosToGitHub(todos)
+  }, 1000)
+
   useEffect(() => {
-    localStorage.setItem('todos', JSON.stringify(todos))
+    debouncedSave(todos)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [todos])
 
   // 通知許可リクエスト（初回のみ）

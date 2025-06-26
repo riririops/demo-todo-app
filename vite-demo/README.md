@@ -1,69 +1,63 @@
-# React + TypeScript + Vite
+# ToDoアプリ（GitHub連携）
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+このアプリは、React＋TypeScriptで作成したToDoリストです。  
+タスクデータはGitHubリポジトリ（`todos.json`）に自動保存されます。
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## セットアップ手順
 
-## Expanding the ESLint configuration
+1. **このリポジトリをクローン**
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+2. **依存パッケージをインストール**
+   ```
+   npm install
+   ```
 
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+3. **GitHub Personal Access Tokenを発行**
+   - [GitHubの設定画面](https://github.com/settings/tokens)から「Contents: Read and write」権限付きでトークンを作成
+   - 「Only select repositories」で保存先リポジトリを選択
 
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
+4. **`.env`ファイルを作成し、下記のように記載**
+   ```
+   VITE_GITHUB_TOKEN=github_pat_XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+   ```
+   ※`.env`ファイルは絶対に公開しないでください
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+5. **`src/githubApi.ts`のREPOを自分のリポジトリ名に変更**
+   ```typescript
+   const REPO = 'your-name/your-repo'; // ← ここを自分のGitHubリポジトリ名に書き換えてください
+   ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+6. **開発サーバーを起動**
+   ```
+   npm run dev
+   ```
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+7. **ブラウザで http://localhost:5173/ を開く**
 
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+---
+
+## 注意事項
+
+- `.env`ファイルは**絶対にGitHubにコミットしないでください**（`.gitignore`に追加済み）
+- トークンやリポジトリ名はご自身のものに書き換えてください
+- 409エラーが頻発する場合は、GitHub上で`todos.json`を一度削除してから再度アプリで追加してください
+
+---
+
+## 依存パッケージ
+
+- React
+- TypeScript
+- lodash.debounce
+
+---
+
+## 自己紹介
+
+皆様お久しぶりです。せぱたです。  
+前回は友人たちと開発をしましたが今回は一人で挑戦してみました。  
+個人開発初のフレームワークを使っての開発でしたが新しい学びがたくさんありとても勉強になるとともに楽しかったです。  
+つたないコードではありますが、ご意見・ご感想等あれば、ぜひIssueやPull Requestでお知らせください！  
+一緒により良いアプリにしていきましょう。
