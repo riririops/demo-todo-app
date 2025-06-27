@@ -1,6 +1,6 @@
 # 自分用Demo-ToDoアプリ（GitHub連携）
 
-このアプリは、React＋TypeScriptで作成したToDoリストです。
+このアプリは、React＋TypeScriptで作成したToDoリストです。  
 github APIを使用しています。
 タスクデータはGitHubリポジトリ（`todos.json`）に自動保存されます。
 
