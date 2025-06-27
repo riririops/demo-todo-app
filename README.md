@@ -78,4 +78,9 @@ const REPO = 'your-name/your-repo'; // ← ここを自分のものに変更
 
 ---
 
-ご質問・ご要望はIssueまたはPull
+##自己紹介  
+
+皆様お久しぶりです。せぱたです。  
+今回はReact学習用のToDoリストを作ってみました。  
+次にToDoリストを作ることがあればFirebase AuthenticationとFirestoreを使ってログイン機能・リアルタイム保存を実現してしてみようと思います。  
+拙いコードではありますが、ご意見・ご感想等あれば、ぜひIssueやPull Requestでお知らせください！
