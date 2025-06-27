@@ -1,63 +1,79 @@
-# 自分用Demo-ToDoアプリ（GitHub連携）
+# React + Vite
 
-このアプリは、React＋TypeScriptで作成したToDoリストです。  
-github APIを使用しています。  
-タスクデータはGitHubリポジトリ（`todos.json`）に自動保存されます。
+このテンプレートは、ViteでReactをHMRといくつかのESLintルール付きで最小構成で動作させるためのものです。
 
----
+現在、2つの公式プラグインが利用可能です:
+
+- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) は [Babel](https://babeljs.io/) を使ってFast Refreshを実現します
+- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) は [SWC](https://swc.rs/) を使ってFast Refreshを実現します
+
+## ESLint設定の拡張
+
+本番アプリケーションを開発する場合は、型認識のlintルールを有効にしたTypeScriptの利用を推奨します。TypeScriptや[`typescript-eslint`](https://typescript-eslint.io)のプロジェクトへの統合方法については、[TSテンプレート](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts)を参照してください。
+
+## テンプレートのクローン方法
+
+このテンプレートを [degit](https://github.com/Rich-Harris/degit) でクローンするには、以下のコマンドを実行してください。
+
+```sh
+npx degit <あなたのGitHubユーザー名>/<リポジトリ名> my-app
+cd my-app
+npm install
+npm run dev
+```
 
 ## セットアップ手順
 
-1. **このリポジトリをクローン**
-
-2. **依存パッケージをインストール**
-   ```
+1. 依存パッケージのインストール  
+   ```sh
    npm install
    ```
-
-3. **GitHub Personal Access Tokenを発行**
-   - [GitHubの設定画面](https://github.com/settings/tokens)から「Contents: Read and write」権限付きでトークンを作成
-   - 「Only select repositories」で保存先リポジトリを選択
-
-4. **`.env`ファイルを作成し、下記のように記載**
-   ```
-   VITE_GITHUB_TOKEN=github_pat_XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-   ```
-   ※`.env`ファイルは絶対に公開しないでください
-
-5. **`src/githubApi.ts`のREPOを自分のリポジトリ名に変更**
-   ```typescript
-   const REPO = 'your-name/your-repo'; // ← ここを自分のGitHubリポジトリ名に書き換えてください
-   ```
-
-6. **開発サーバーを起動**
-   ```
+2. 開発サーバーの起動  
+   ```sh
    npm run dev
    ```
+3. ビルド  
+   ```sh
+   npm run build
+   ```
 
-7. **ブラウザで http://localhost:5173/ を開く**
+## このテンプレートでできること
 
----
+- React + Viteによる高速な開発体験
+- HMR（ホットモジュールリプレースメント）による即時反映
+- ESLintによるコード品質の維持
+- TypeScript対応（設定を追加することで利用可能）
+- プロダクションビルドの作成
+- 必要に応じてプラグインやライブラリの追加が容易
 
-## 注意事項
+その他、ViteやReactのエコシステムを活用した拡張が可能
 
-- `.env`ファイルは**絶対にGitHubにコミットしないでください**（`.gitignore`に追加済み）
-- トークンやリポジトリ名はご自身のものに書き換えてください
-- 409エラーが頻発する場合は、GitHub上で`todos.json`を一度削除してから再度アプリで追加してください
+## ディレクトリ構成例
 
----
+```
+my-app/
+├── public/
+├── src/
+│   ├── assets/
+│   ├── components/
+│   ├── App.jsx
+│   └── main.jsx
+├── .eslintrc.cjs
+├── index.html
+└── package.json
+```
 
-## 依存パッケージ
+## 主なコマンド
 
-- React
-- TypeScript
-- lodash.debounce
+- `npm run dev` : 開発サーバー起動
+- `npm run build` : 本番ビルド
+- `npm run lint` : ESLintによるコードチェック
 
----
+## 動作環境
 
-## 自己紹介
+- Node.js v18以上推奨
 
-皆様お久しぶりです。せぱたです。  
-今回はReact学習用のToDoリストを作ってみました。  
-次にToDoリストを作ることがあればFirebase AuthenticationとFirestoreを使ってログイン機能・リアルタイム保存を実現してしてみようと思います。  
-拙いコードではありますが、ご意見・ご感想等あれば、ぜひIssueやPull Requestでお知らせください！  
+## 参考リンク
+
+- [Vite公式ドキュメント](https://vitejs.dev/)
+- [React公式ドキュメント](https://ja.react.dev/)
