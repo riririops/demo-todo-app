@@ -1,79 +1,81 @@
-# React + Vite
+# 自分用ToDoアプリ（GitHub連携版）
 
-このテンプレートは、ViteでReactをHMRといくつかのESLintルール付きで最小構成で動作させるためのものです。
+このアプリはReact製のToDoリストです。  
+タスクデータを**GitHubリポジトリ上のJSONファイル**として保存・取得できます。
 
-現在、2つの公式プラグインが利用可能です:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) は [Babel](https://babeljs.io/) を使ってFast Refreshを実現します
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) は [SWC](https://swc.rs/) を使ってFast Refreshを実現します
+## 機能
 
-## ESLint設定の拡張
+- タスクの追加・編集・削除
+- カテゴリ（仕事・勉強・プライベート）での絞り込み
+- キーワード検索
+- 締切日付きタスク管理
+- 完了チェック
+- 締切が近いタスクの通知（ブラウザ通知許可が必要）
+- **GitHubリポジトリにタスクデータを保存・取得**
 
-本番アプリケーションを開発する場合は、型認識のlintルールを有効にしたTypeScriptの利用を推奨します。TypeScriptや[`typescript-eslint`](https://typescript-eslint.io)のプロジェクトへの統合方法については、[TSテンプレート](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts)を参照してください。
-
-## テンプレートのクローン方法
-
-このテンプレートを [degit](https://github.com/Rich-Harris/degit) でクローンするには、以下のコマンドを実行してください。
-
-```sh
-npx degit <あなたのGitHubユーザー名>/<リポジトリ名> my-app
-cd my-app
-npm install
-npm run dev
-```
+---
 
 ## セットアップ手順
 
+### 1. GitHubリポジトリの準備
+
+- 任意のリポジトリ（例: `your-name/your-repo`）をGitHub上で作成してください。
+- 空の `todos.json` ファイルをリポジトリ直下に作成しておくとスムーズです。
+
+### 2. GitHub Personal Access Token の発行
+
+- [GitHubの設定画面](https://github.com/settings/tokens)から**repo権限**付きのトークンを発行してください。
+- トークンは `.env` ファイルで利用します。
+
+### 3. `.env` ファイルの作成
+
+プロジェクトのルート（`vite-demo` ディレクトリ）に `.env` ファイルを作成し、以下のように記述します。
+
+```
+VITE_GITHUB_TOKEN=（ここに発行したトークンを貼り付け）
+```
+
+### 4. `githubApI.ts` の設定
+
+`src/githubApI.ts` の冒頭を**自分のGitHubアカウント名・リポジトリ名**に書き換えてください。
+
+```typescript
+const REPO = 'your-name/your-repo'; // ← ここを自分のものに変更
+```
+
+---
+
+## 開発サーバーの起動
+
 1. 依存パッケージのインストール  
-   ```sh
+   ```
    npm install
    ```
+
 2. 開発サーバーの起動  
-   ```sh
+   ```
    npm run dev
    ```
-3. ビルド  
-   ```sh
-   npm run build
-   ```
 
-## このテンプレートでできること
+3. ブラウザで `http://localhost:5173` などにアクセス
 
-- React + Viteによる高速な開発体験
-- HMR（ホットモジュールリプレースメント）による即時反映
-- ESLintによるコード品質の維持
-- TypeScript対応（設定を追加することで利用可能）
-- プロダクションビルドの作成
-- 必要に応じてプラグインやライブラリの追加が容易
+---
 
-その他、ViteやReactのエコシステムを活用した拡張が可能
+## 注意事項
 
-## ディレクトリ構成例
+- **GitHubトークンは絶対に公開しないでください。**
+- 複数人で同じリポジトリを使う場合、同時編集で競合が起きる可能性があります。
+- GitHub APIの利用制限にご注意ください。
 
-```
-my-app/
-├── public/
-├── src/
-│   ├── assets/
-│   ├── components/
-│   ├── App.jsx
-│   └── main.jsx
-├── .eslintrc.cjs
-├── index.html
-└── package.json
-```
+---
 
-## 主なコマンド
+## カスタマイズ
 
-- `npm run dev` : 開発サーバー起動
-- `npm run build` : 本番ビルド
-- `npm run lint` : ESLintによるコードチェック
+- スタイルは `App.css` で調整できます。
+- カテゴリは `App.tsx` の `CATEGORIES` 配列で変更できます。
 
-## 動作環境
+---
 
-- Node.js v18以上推奨
-
-## 参考リンク
-
-- [Vite公式ドキュメント](https://vitejs.dev/)
-- [React公式ドキュメント](https://ja.react.dev/)
+ご質問・ご要望はIssueまたはPull
